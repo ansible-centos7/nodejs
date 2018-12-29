@@ -1,0 +1,17 @@
+- name: Install required packages
+  become: yes
+  yum:
+    name: '@Development Tools'
+    state: present
+
+- name: Add the Node.js repository to the yum repos
+  become: yes
+  shell: "curl -sL {{ nodejs_rpm_url }} | bash -"
+  args:
+    chdir: /tmp
+
+- name: Install Node.js
+  become: yes
+  yum:
+    name: nodejs
+    state: present
